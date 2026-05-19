@@ -231,7 +231,7 @@
 // #define CONFIG_DUER_LC_DEMO_ENABLE           //小度澜川AI对话DEMO
 // #define CONFIG_TWETALK_ENABLE
 #define CONFIG_GIZWITS_SDK_ENABLE
-#define CONFIG_NERTC_CONNECTION               //使能NERTC音视频通话连接(与Coze WebSocket互斥)
+#define CONFIG_CONNECTION_TYPE_NERTC         //使能NERTC音视频通话连接(与Coze WebSocket互斥)
 
 /*************电信云平台配网方式选择*************/
 #ifdef CONFIG_TELECOM_SDK_ENABLE
@@ -826,4 +826,3 @@
 #define CONFIG_CXX_SUPPORT    // 使能C++环境支持
 
 #endif
-

@@ -4,7 +4,7 @@
 #include "ai_coze_server.h"
 #include "ai_coze_config.h"
 #include "ai_device_manager.h"
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
 #include "nertc_protocol.h"
 #endif
 
@@ -102,7 +102,7 @@ static int ai_coze_sdk_do_event(int event, int arg){
                     ai_coze.ai_chat_created=1;
                     enc_start();
                 }
-            #elif defined(CONFIG_NERTC_CONNECTION)
+            #elif defined(CONFIG_CONNECTION_TYPE_NERTC)
                 /* NERTC 模式：根据当前 AI 状态执行不同操作
                  * 按钮只控制 audio channel 的开关，不控制 RTC 线程 */
                 {
@@ -223,7 +223,10 @@ int ai_server_request(void *server, int req_type, union ai_coze_req *req){
     int err = 0;
     switch (req_type) {
     case AI_REQ_CONNECT:
-#if CHAT_BY_MY_COZE
+#if defined(CONFIG_CONNECTION_TYPE_NERTC)
+        memset(&device_status, 0, sizeof(device_status_t));
+        giz_chat_init();
+#elif CHAT_BY_MY_COZE
         ai_send_event_to_sdk(AI_EVENT_MQTT_GET_COZE_INFO_SUCC, 0);
 #else
         err=gizwits_login();

@@ -6,7 +6,7 @@
 #include "ai_coze_api_message.h"
 #include "nertc_protocol.h"
 
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
 /**
  * @brief NERTC 事件回调 - 处理状态机切换
  */
@@ -40,7 +40,7 @@ static void nertc_event_callback(const nertc_protocol_event_t *event, void *user
             break;
     }
 }
-#endif /* CONFIG_NERTC_CONNECTION */
+#endif /* CONFIG_CONNECTION_TYPE_NERTC */
 
 extern struct ai_coze_sdk_api ai_coze_sdk_api;
 static coze_ws_info_t coze_ws_info;
@@ -90,7 +90,7 @@ static void giz_chat_start(void *parm){
 
     int err;
     
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
     /* ========== NERTC 模式：只使用 NERTC SDK，不连接 Coze WebSocket ========== */
     {
         /* 设置初始状态：STARTING */
@@ -243,7 +243,7 @@ exit_ws:
         coze_ws_info._exit(&coze_ws_info);
         ai_send_event_to_sdk(AI_EVENT_COZE_WEBSOCKET_BUILD_FAIL, err);
         //ai_send_event_to_sdk(AI_EVENT_WEBS_CLOSE, 1); // @NOTICE: 通知 AI 线程退出
-#endif /* CONFIG_NERTC_CONNECTION */
+#endif /* CONFIG_CONNECTION_TYPE_NERTC */
 }
 
 
@@ -264,7 +264,7 @@ void giz_chat_init(void){
 void giz_chat_deinit(void){
     printf("\n\n********************************************giz_chat_deinit*****************************************\n");
     
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
     /* NERTC 模式：停止并清理 NERTC SDK */
     log_info("[NERTC] Stopping protocol...");
     nertc_protocol_stop();
@@ -285,7 +285,7 @@ void giz_chat_deinit(void){
 
     if(coze_ws_info._exit)
         coze_ws_info._exit(&coze_ws_info);
-#endif /* CONFIG_NERTC_CONNECTION */
+#endif /* CONFIG_CONNECTION_TYPE_NERTC */
     
     /* 公共部分：清理 giz_chat 线程 */
     if(giz_chat_pid){

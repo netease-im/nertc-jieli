@@ -423,7 +423,6 @@ void nertc_protocol_config_init(nertc_protocol_config_t *config)
     /* 必要配置：AppKey 和 DeviceID */
     config->app_key = NERTC_DEFAULT_APP_KEY;
     config->device_id = NERTC_DEFAULT_DEVICE_ID;
-    config->license = NERTC_DEFAULT_TEST_LICENSE;
     
     /* 音频配置 */
     config->sample_rate = NERTC_DEFAULT_SAMPLE_RATE;
@@ -432,7 +431,6 @@ void nertc_protocol_config_init(nertc_protocol_config_t *config)
     config->frame_duration = NERTC_DEFAULT_FRAME_DURATION;
     
     /* 功能开关 */
-    config->force_unsafe_mode = true;
     config->enable_server_aec = false;  /* 默认不使用服务端AEC */
     config->prefer_use_psram = true;    /* 高性能设备使用PSRAM */
     config->enable_asr = true;
@@ -496,7 +494,7 @@ int nertc_protocol_init_with_config(const nertc_protocol_config_t *config)
     
     sdk_cfg.app_key = config->app_key;
     sdk_cfg.device_id = config->device_id;
-    sdk_cfg.force_unsafe_mode = config->force_unsafe_mode;
+    sdk_cfg.force_unsafe_mode = true;
     
     /* 音频配置 */
     sdk_cfg.audio_config.sample_rate = config->sample_rate > 0 ? config->sample_rate : NERTC_DEFAULT_SAMPLE_RATE;
@@ -513,9 +511,6 @@ int nertc_protocol_init_with_config(const nertc_protocol_config_t *config)
 
     /* 日志配置 */
     sdk_cfg.log_cfg.log_level = NERTC_SDK_LOG_INFO;
-    
-    /* License配置 */
-    sdk_cfg.licence_cfg.license = config->license ? config->license : NERTC_DEFAULT_TEST_LICENSE;
     
     NERTC_LOGI("Creating engine...");
     
@@ -636,7 +631,6 @@ int nertc_protocol_start(const char *cname, uint64_t uid)
     /* 重置 Join 结果 */
     g_ctx.join_result = -1;
     
-    /* 非安全模式下token可以为空 */
     int ret = nertc_join(g_ctx.engine, g_ctx.cname, "", join_uid);
     if (ret != 0) {
         NERTC_LOGE("Join failed, error: %d", ret);
