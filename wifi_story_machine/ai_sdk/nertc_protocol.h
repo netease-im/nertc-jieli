@@ -27,8 +27,6 @@ extern "C" {
 #define NERTC_DEFAULT_CHANNELS              1
 #define NERTC_DEFAULT_FRAME_DURATION        60      /* 60ms */
 
-/* 默认测试 License */
-#define NERTC_DEFAULT_TEST_LICENSE "eyJhbGdvcml0aG0iOiJkZWZhdWx0IiwiY3JlZGVudGlhbCI6eyJhY3RpdmF0ZURhdGUiOjE3NTkxMjAyMTQsImV4cGlyZURhdGUiOjE3OTMyNDgyMTQsImxpY2Vuc2VLZXkiOiJ5dW54aW5Db21tb25UZXN0Iiwibm9uY2UiOiJQLW85S3o5RTI2WSJ9LCJzaWduYXR1cmUiOiJFcUt4c2s5TTFNWGp2dWE5Z3J4MGVYVkxxdHBrMm5aWUoyMHNIM0x4LzVMT0tFL3BOTktadDdmNG04eVE5ZWFIQmxHS2NaYUdmaVlNeTdtZ1pYTjVLVFRvZzk2K2RYZmhuZ1N4UG9YUDZBUkNHdHlmZ1N1SDFtbGlxYUYyNWVrWVlRQzUwV3V5ZHFMRzJyaDB1cVhrR05oSkhtVWtRdnVndU1sVlZjc2JLelRCNGRubmtzVVhOcm12aEZXQS9IUTNqd0kyYmFaOTNlMzM4UkFjYTRlVHBTeUhkb1EzRlNGVkpxUXBWRHlJVXhOb21ORXhJT1Z2bzN5dkdRcERLTldjVUFFejFQN1R0Z3ozS1U4RnZYT09sRXNPTU5UYzRxdU9JSWp1SWNRaE1aK2FrSHlDRURHSE04TUthYkdTU2JZOXN1NWVwdjZEZUZxWjEza29wK1pHK2c9PSIsInZlcnNpb24iOiIxLjAifQ=="
 /* ============================================================================
  * 协议事件定义
  * ============================================================================ */

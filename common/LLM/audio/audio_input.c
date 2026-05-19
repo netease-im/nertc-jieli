@@ -33,7 +33,7 @@
 #define AUDIO_RECORD_VOICE_UPLORD_LEN (640)
 #elif defined CONFIG_TWETALK_ENABLE
 #define AUDIO_RECORD_VOICE_UPLORD_LEN (180)
-#elif defined CONFIG_GIZWITS_SDK_ENABLE
+#elif defined CONFIG_CONNECTION_TYPE_NERTC
 #define AUDIO_RECORD_VOICE_UPLORD_LEN (180)
 #else
 #define AUDIO_RECORD_VOICE_UPLORD_LEN (1280)
@@ -288,7 +288,7 @@ static void audio_recoder_init()
     req.enc.frame_ms    = 60;
 #endif
 
-#ifdef CONFIG_GIZWITS_SDK_ENABLE
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
     req.enc.no_header=1;
     req.enc.format      = "opus";
     req.enc.bitrate     = 16000;
@@ -455,7 +455,7 @@ static void audio_player_net_init()
     req.dec.opus_cbr_pktlen = 180;
 #endif
 
-#ifdef CONFIG_GIZWITS_SDK_ENABLE
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
     req.dec.dec_type        = "opus";
     req.dec.channel         = 0;
     req.dec.sample_rate     = 0;
@@ -667,7 +667,7 @@ static int _audio_soft_init(void)
 #elif defined CONFIG_TWETALK_ENABLE
     pcm_buff_r = malloc(SAMPLE_RATE * CHANNEL * 1);
     cbuf_init(&g_audio_hdl.pcm_cbuff_r, pcm_buff_r, SAMPLE_RATE * CHANNEL * 1);
-#elif defined CONFIG_GIZWITS_SDK_ENABLE
+#elif defined CONFIG_CONNECTION_TYPE_NERTC
     pcm_buff_r = malloc(SAMPLE_RATE * CHANNEL * 1);
     cbuf_init(&g_audio_hdl.pcm_cbuff_r, pcm_buff_r, SAMPLE_RATE * CHANNEL * 1);
 #else
@@ -755,4 +755,3 @@ int get_recoder_state()
 {
     return recoder_state;
 }
-

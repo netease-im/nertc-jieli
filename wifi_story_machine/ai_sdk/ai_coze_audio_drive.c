@@ -2,7 +2,7 @@
 #include "system/includes.h"
 #include "ai_coze_server.h"
 #include "ai_coze_api_message.h"
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
 #include "nertc_protocol.h"
 #endif
 
@@ -41,7 +41,7 @@ int rtc_thread(){
             read_len = _device_get_voice_data(audio_buffer, DEFAULT_READ_SIZE);
             // printf("read_len:%d",read_len);
             if(__this->is_enc_run && read_len){
-#ifdef CONFIG_NERTC_CONNECTION
+#ifdef CONFIG_CONNECTION_TYPE_NERTC
                 /* 检查音频通道是否打开，未打开则跳过发送（不计入失败次数） */
                 if (!nertc_protocol_is_audio_channel_opened()) {
                     continue;
